@@ -4,8 +4,8 @@
 // Importando e instanciando as Rotas (Router) do Express.
 const router = require('express').Router();
 
-// Importando o nosso modelo de dados de Contatos (contacts.js).
-const contactsModel = require('./contact');
+// Importando o nosso modelo de dados de Contatos (customers.js).
+const customersModel = require('./customer');
 
 // CRUD - Banco de dados
 //
@@ -23,42 +23,42 @@ const contactsModel = require('./contact');
 // geralmente nomeados de "req" e "res", que quer dizer "requisição" e "resposta" respectivamente.
 
 // Create
-// Acessando o endereço http://localhost:3000/contacts através de um metódo POST o 
+// Acessando o endereço http://localhost:3000/customers através de um metódo POST o 
 // usuário da nossa API deve ser capaz de inserir um Contato no nosso Banco de Dados.
-router.post('/contacts', async (req, res) => {
-    const contact = new contactsModel(req.body);
+router.post('/customers', async (req, res) => {
+    const customers = new customersModel(req.body);
 
     try {
-        await contact.save();
-        res.send(contact);
+        await customer.save();
+        res.send(customer);
     } catch (error) {
         res.status(500).send(error);
     }
 });
 
 // Read
-// Acessando o endereço http://localhost:3000/contacts através de um metódo GET o 
+// Acessando o endereço http://localhost:3000/customers através de um metódo GET o 
 // usuário da nossa API deve ser capaz de visualizar todos os contatos armazenados no 
 // nosso Banco de Dados.
-router.get('/contacts', async (req, res) => {
-    const contacts = await contactsModel.find({});
+router.get('/customers', async (req, res) => {
+    const customers = await customersModel.find({});
 
     try {
-        res.send(contacts);
+        res.send(customers);
     } catch (error) {
         res.status(500).send(error);
     }
 });
 
 // Update
-// Acessando o endereço http://localhost:3000/contacts/id-do-contato através de um metódo
+// Acessando o endereço http://localhost:3000/customers/id-do-contato através de um metódo
 // PUT o usuário da nossa API deve ser capaz de atualizar as informações de um Contato do
 // nosso Banco de Dados.
-router.put('/contacts/:id', async (req, res) => {
+router.put('/customers/:id', async (req, res) => {
     try {
-        const contact = await contactsModel.findByIdAndUpdate(req.params.id, req.body);
+        const customer = await customersModel.findByIdAndUpdate(req.params.id, req.body);
 
-        res.send(contact);
+        res.send(customers);
 
     } catch (error) {
         res.status(500).send(error);
@@ -66,17 +66,17 @@ router.put('/contacts/:id', async (req, res) => {
 });
 
 // Delete
-// Acessando o endereço http://localhost:3000/contacts/id-do-contato através de um metódo
+// Acessando o endereço http://localhost:3000/customers/id-do-contato através de um metódo
 // DELETE o usuário da nossa API deve ser capaz de remover um Contato do Banco de Dados.
-router.delete('/contacts/:id', async (req, res) => {
+router.delete('/customers/:id', async (req, res) => {
     try {
-        const contact = await contactsModel.findByIdAndDelete(req.params.id);
+        const customer = await customersModel.findByIdAndDelete(req.params.id);
 
-        if (!contact) {
+        if (!customer) {
             res.status(404).send("Não foi encontrado um contato com este id");
         }
 
-        res.send(contact);
+        res.send(customer);
     } catch (error) {
         res.status(500).send(error);
     }
