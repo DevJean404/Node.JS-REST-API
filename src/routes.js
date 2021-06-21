@@ -39,7 +39,7 @@ router.post('/customers', async (req, res) => {
 // Read
 // Acessando o endereço http://localhost:3000/customers através de um metódo GET o 
 // usuário da nossa API deve ser capaz de visualizar todos os contatos armazenados no 
-// nosso Banco de Dados.
+// nosso Banco de Dados
 router.get('/customers', async (req, res) => {
     const customers = await customersModel.find({});
 
